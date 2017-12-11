@@ -4,7 +4,7 @@ class BitlyApi {
         return new Promise((resolve) => {
             const words = text.replace(/\n/g, " ").split(" ");
 
-            const httpFound = words.filter(word => word.indexOf("http://") === 0 ||  word.indexOf("https://") === 0); //TODO: Might need to modify this?
+            const httpFound = words.filter(word => word.indexOf("http://") === 0 ||  word.indexOf("https://") === 0);
 
             Promise.all(httpFound.map(this.getShortenedUrl)).then(results => {
                 results.forEach(data => {

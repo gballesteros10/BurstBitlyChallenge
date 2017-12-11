@@ -9,6 +9,10 @@ class App extends Component {
   constructor(props, context) {
     super(props, context);
 
+    this.state = {
+      isNumberValid: true
+    };
+
     this.setMessageRef = this.setMessageRef.bind(this);
     this.setRecipientRef = this.setRecipientRef.bind(this);
     this.send = this.send.bind(this);
@@ -22,8 +26,7 @@ class App extends Component {
   }
 
   send() {
-    if (this.messageInput && this.recipientInput &&
-      this.messageInput.value && this.recipientInput.value) {
+    if (this.isValid()) {
       BitlyApi.replaceWithShortUrls(this.messageInput.value).then(messageWithShortUrls => {
         BurstApi.send(messageWithShortUrls, this.recipientInput.value).then(result => {
           if (result)
@@ -33,6 +36,14 @@ class App extends Component {
         });
       });
     }
+  }
+
+  isValid() {
+    let isNumberValid = true;
+    if (this.recipientInput.value.length !== 10)
+      isNumberValid = false;
+    this.setState({ isNumberValid });
+    return isNumberValid;
   }
 
   render() {
@@ -46,14 +57,8 @@ class App extends Component {
                 <h3 className="panel-title">Send SMS</h3>
               </div>
               <div className="panel-body">
-                <div className="form-group">
-                  <label>Message:</label>
-                  <Message setMessageRef={this.setMessageRef} />
-                </div>
-                <div className="form-group">
-                  <label>Recipient:</label>
-                  <Recipient setRecipientRef={this.setRecipientRef} />
-                </div>
+                <Message setMessageRef={this.setMessageRef} />
+                <Recipient setRecipientRef={this.setRecipientRef} isNumberValid={this.state.isNumberValid} />
                 <button className="btn btn-primary pull-right" onClick={this.send}>Send</button>
               </div>
             </div>
