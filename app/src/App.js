@@ -18,8 +18,6 @@ class App extends Component {
     this.setMessageRef = this.setMessageRef.bind(this);
     this.setRecipientRef = this.setRecipientRef.bind(this);
     this.send = this.send.bind(this);
-
-    console.log(process.env.NODE_ENV);
   }
 
   setMessageRef(input) {
