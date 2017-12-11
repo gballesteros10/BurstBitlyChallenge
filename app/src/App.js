@@ -18,6 +18,8 @@ class App extends Component {
     this.setMessageRef = this.setMessageRef.bind(this);
     this.setRecipientRef = this.setRecipientRef.bind(this);
     this.send = this.send.bind(this);
+
+    console.log(process.env.NODE_ENV);
   }
 
   setMessageRef(input) {
@@ -29,8 +31,8 @@ class App extends Component {
 
   send() {
     if (this.isValid()) {
+      this.setState({ isSending: true });
       BitlyApi.replaceWithShortUrls(this.messageInput.value).then(messageWithShortUrls => {
-        this.setState({ isSending: true });
         BurstApi.send(messageWithShortUrls, this.recipientInput.value).then(() => {
           this.setState({ messageSent: true, isSending: false });
         });

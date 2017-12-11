@@ -1,13 +1,15 @@
+import { BURST_APIKEY, BURST_APISECRET, BURST_CALLER_ID } from '../.env.js';
+
 class BurstApi {
   static send(message, recipient) {
 
     let url = new URL("https://burst.transmitsms.com/api-wrapper/messages.single"),
       params = {
-        apikey: 'cb5fd450acf95e69a47a8352c84288ca',
-        apisecret: 'burstsmsTEST@',
+        apikey: BURST_APIKEY,
+        apisecret: BURST_APISECRET,
         mobile: `63${recipient}`,
         message: message,
-        caller_id: 'test',
+        caller_id: BURST_CALLER_ID,
       };
 
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
