@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Recipient from './components/Recipient';
 import Message from './components/Message';
 import BitlyApi from './api/BitlyApi';
+import BurstApi from './api/BurstApi';
 import './App.css';
 
 class App extends Component {
@@ -9,17 +10,27 @@ class App extends Component {
     super(props, context);
 
     this.setMessageRef = this.setMessageRef.bind(this);
+    this.setRecipientRef = this.setRecipientRef.bind(this);
     this.send = this.send.bind(this);
   }
 
   setMessageRef(input) {
     this.messageInput = input;
   }
+  setRecipientRef(input) {
+    this.recipientInput = input;
+  }
 
   send() {
-    if (this.messageInput && this.messageInput.value) {
+    if (this.messageInput && this.recipientInput &&
+      this.messageInput.value && this.recipientInput.value) {
       BitlyApi.replaceWithShortUrls(this.messageInput.value).then(messageWithShortUrls => {
-        console.log(messageWithShortUrls) //TODO: Use Burst SMS to send
+        BurstApi.send(messageWithShortUrls, this.recipientInput.value).then(result => {
+          if (result)
+            console.log('Message sent');
+          else
+            console.log('Message not sent');
+        });
       });
     }
   }
@@ -40,10 +51,8 @@ class App extends Component {
                   <Message setMessageRef={this.setMessageRef} />
                 </div>
                 <div className="form-group">
-                  <label>Recipient(s):</label>
-                  <Recipient />
-                  <Recipient />
-                  <Recipient />
+                  <label>Recipient:</label>
+                  <Recipient setRecipientRef={this.setRecipientRef} />
                 </div>
                 <button className="btn btn-primary pull-right" onClick={this.send}>Send</button>
               </div>

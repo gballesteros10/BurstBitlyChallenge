@@ -6,9 +6,8 @@ class Recipient extends Component {
       <div className="input-group" style={{ marginBottom: "5px" }}>
         <div className="input-group-addon">+63</div>
         <input
-          type="number" className="form-control" placeholder="917-999-9999" />
-
-        <div className="input-group-addon">Add</div>
+          ref={this.props.setRecipientRef}
+          type="number" className="form-control" placeholder="9171112222" />
       </div>
     );
   }
