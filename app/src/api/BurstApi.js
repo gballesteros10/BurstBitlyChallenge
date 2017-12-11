@@ -13,9 +13,9 @@ class BurstApi {
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
 
     return new Promise((resolve) => {
-      fetch(url)
+      fetch(url, { mode: 'no-cors' })
         .then(function (response) {
-          resolve(response.ok);
+          resolve();
         })
     });
   }
