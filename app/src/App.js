@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Recipient from './components/Recipient';
+import Message from './components/Message';
 import './App.css';
 
 class App extends Component {
@@ -16,11 +18,13 @@ class App extends Component {
               <div className="panel-body">
                 <div className="form-group">
                   <label>Message:</label>
-                  {/*Message component*/}
+                  <Message />
                 </div>
                 <div className="form-group">
                   <label>Recipient(s):</label>
-                  {/*Message component*/}
+                  <Recipient />
+                  <Recipient />
+                  <Recipient />
                 </div>
                 <button className="btn btn-primary pull-right">Send</button>
               </div>
