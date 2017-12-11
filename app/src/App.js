@@ -1,18 +1,32 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>
+        <div className="container">
+          <div className="col-md-8 col-md-offset-2">
+
+            <div className="panel panel-primary">
+              <div className="panel-heading">
+                <h3 className="panel-title">Send SMS</h3>
+              </div>
+              <div className="panel-body">
+                <div className="form-group">
+                  <label>Message:</label>
+                  {/*Message component*/}
+                </div>
+                <div className="form-group">
+                  <label>Recipient(s):</label>
+                  {/*Message component*/}
+                </div>
+                <button className="btn btn-primary pull-right">Send</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
